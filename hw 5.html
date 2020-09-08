@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>My First Map</title>
+   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+   integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+   crossorigin=""/>
+
+   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+   integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+   crossorigin=""></script>
+
+<script src="./old_well_4326.geojson"></script>
+</head>
+<body>
+   
+   <div id='mapid'></div>
+<style> 
+#mapid{ width: 900px; height: 500px;}
+</style>   
+
+<script>
+var map = L.map('mapid').setView([35.91, 79.05], 17);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{}).addTo(map)
+L.marker([35.9092, -79.0475]).addTo(map)
+.bindPopup('Fetzer Gym')
+.openPopup();
+
+L.marker([35.912925, -79.046766]).addTo(map)
+.bindPopup('Graham Residence Hall')
+.openPopup();
+
+L.marker([35.913683, -79.048703]).addTo(map)
+.bindPopup('Coker Arboretum')
+.openPopup();
+
+//L.geoJson(uncwell).addTo(map)
+var uncIcon = L.icon({
+   iconURL:'https://faopharmacy.unc.edu/files/2018/04/Old-Well-Icon-Example.png', 
+   iconSize: [50,50],
+   popupAnchor: [0,0]
+});
+
+ var customPopup = "UNC Well<br/><img src='https://global.unc.edu/files/2020/02/spring_4_09__12_054-768x511.jpg'width='100px'/>";
+
+ L.geoJSON(uncwell, { // a
+ pointToLayer: function (feature, latlng) { // b
+ return L.marker(latlng, {icon: uncIcon});}}) // c
+ .bindPopup(customPopup) // d
+ .addTo(map); //
+
+
+</script>
+
+
+</body>
+</html>
