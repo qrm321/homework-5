@@ -13,6 +13,10 @@
    crossorigin=""></script>
 
 <script src="./old_well_4326.geojson"></script>
+
+<script src="./coker.geojson"></script>
+<script src="./fetzer.geojson"></script>
+<script src="./graham.geojson"></script>
 </head>
 <body>
    
@@ -24,7 +28,7 @@
 <script>
 var map = L.map('mapid').setView([35.91, 79.05], 17);
 
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{}).addTo(map)
+L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',{}).addTo(map)
 L.marker([35.9092, -79.0475]).addTo(map)
 .bindPopup('Fetzer Gym')
 .openPopup();
@@ -36,20 +40,47 @@ L.marker([35.912925, -79.046766]).addTo(map)
 L.marker([35.913683, -79.048703]).addTo(map)
 .bindPopup('Coker Arboretum')
 .openPopup();
+//L.geoJson(fetzer).addTo(map)
+var fetzericon = L.icon({
+   iconURL:'https://www.netclipart.com/pp/f/69-690910_handball-png.png', 
+   iconSize: [50,50],
+   popupAnchor: [0,0]
+});
+var customPopup1 = "Fetzer Gym<br/><img src='https://www.netclipart.com/isee/JRhJmh_handball-maxi-grip-handball-ball-select/' width '100px'/>";
+// L.geoJSON(fetzer, { // a
+//  pointToLayer: function (feature, latlng) { // b
+  L.marker([35.9092, -79.0475], {icon: fetzericon}) // c
+ .bindPopup(customPopup1) // d
+ .addTo(map); //
 
-//L.geoJson(uncwell).addTo(map)
-var uncIcon = L.icon({
-   iconURL:'https://faopharmacy.unc.edu/files/2018/04/Old-Well-Icon-Example.png', 
+//L.geoJson(graham).addTo(map)
+var grahamicon = L.icon({
+   iconURL:'https://upload.wikimedia.org/wikipedia/commons/5/5c/Graham_Residence_Hall_at_UNC.jpg', 
+   iconSize: [50,50],
+   popupAnchor: [0,0]
+});
+var customPopup2= "Graham hall<br/><img src='https://commons.wikimedia.org/wiki/Laptop#/media/File:Crystal128-laptop.svg' width '100px'/>"; 
+L.geoJSON(graham, { // a
+ pointToLayer: function (feature, latlng) { // b
+ return L.marker(latlng, {icon: grahamicon});}}) // c
+ .bindPopup(customPopup2) // d
+ .addTo(map); //
+
+//L.geoJson(coker).addTo(map)
+
+
+var cokericon = L.icon({
+   iconURL:'https://en.wikipedia.org/wiki/Coker_Arboretum#/media/File:Coker_Arboretum.jpg', 
    iconSize: [50,50],
    popupAnchor: [0,0]
 });
 
- var customPopup = "UNC Well<br/><img src='https://global.unc.edu/files/2020/02/spring_4_09__12_054-768x511.jpg'width='100px'/>";
+ var customPopup3 = "Coker arboretum<br/><img src='https://commons.wikimedia.org/w/index.php?sort=relevance&search=File%3ACoker+Arboretum.jpg&title=Special:Search&profile=advanced&fulltext=1&advancedSearch-current=%7B%7D&ns0=1&ns6=1&ns12=1&ns14=1&ns100=1&ns106=1#/media/File:Coker_Arboretum_-_March_2020.jpg'width='100px'/>";
 
- L.geoJSON(uncwell, { // a
+ L.geoJSON(coker, { // a
  pointToLayer: function (feature, latlng) { // b
- return L.marker(latlng, {icon: uncIcon});}}) // c
- .bindPopup(customPopup) // d
+ return L.marker(latlng, {icon: cokerIcon});}}) // c
+ .bindPopup(customPopup3) // d
  .addTo(map); //
 
 
